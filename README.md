@@ -16,7 +16,7 @@ Revamped for the following usage:
 * https://github.com/JingchunCheng/All-Age-Faces-Dataset (aligned faces)
 
 ## preliminary Results
-* ![results as found in the pdf](results.pdf)
+* ![results as found in the pdf](demo/results.png)
 The training process has been tested on Google Cloud Platform NVIDIA Tesla P100 NVIDIA. The training time for 50 epochs on 13k images is roughly 3h.
 
 ## Custom Training
