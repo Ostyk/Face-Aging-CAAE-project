@@ -73,7 +73,7 @@ class FaceAging(object):
             name='z_prior'
         )
         # ************************************* build the graph *******************************************************
-        print '\n\tBuilding graph ...'
+        print ('\n\tBuilding graph ...')
 
         # encoder: input image --> z
         self.z = self.encoder(
@@ -279,7 +279,8 @@ class FaceAging(object):
             dtype=np.float32
         ) * self.image_value_range[0]
         for i, label in enumerate(sample_files):
-            label = int(str(sample_files[i]).split('/')[-1].split('_')[0])
+            #label = int(str(sample_files[i]).split('/')[-1].split('_')[0])
+            label = int(sample_files[i].split('/')[-1].split("A")[-1].split(".")[0]) #all faces dataset
             if 0 <= label <= 5:
                 label = 0
             elif 6 <= label <= 10:
@@ -301,7 +302,9 @@ class FaceAging(object):
             else:
                 label = 9
             sample_label_age[i, label] = self.image_value_range[-1]
-            gender = int(str(sample_files[i]).split('/')[-1].split('_')[1])
+            #gender = int(str(sample_files[i]).split('/')[-1].split('_')[1]) #for UTK
+            gender_number = int(sample_files[i].split('/')[-1].split("A")[0])
+            gender = 1 if gender_number<=7380 else 0 #1 is female, 0 is male
             sample_label_gender[i, gender] = self.image_value_range[-1]
 
         # ******************************************* training *******************************************************
@@ -353,7 +356,8 @@ class FaceAging(object):
                     dtype=np.float
                 ) * self.image_value_range[0]
                 for i, label in enumerate(batch_files):
-                    label = int(str(batch_files[i]).split('/')[-1].split('_')[0])
+                    #label = int(str(batch_files[i]).split('/')[-1].split('_')[0])
+                    label = int(sample_files[i].split('/')[-1].split("A")[-1].split(".")[0]) #all faces dataset
                     if 0 <= label <= 5:
                         label = 0
                     elif 6 <= label <= 10:
@@ -375,7 +379,9 @@ class FaceAging(object):
                     else:
                         label = 9
                     batch_label_age[i, label] = self.image_value_range[-1]
-                    gender = int(str(batch_files[i]).split('/')[-1].split('_')[1])
+                    #gender = int(str(batch_files[i]).split('/')[-1].split('_')[1]) # for UTK
+                    gender_number = int(batch_files[i].split('/')[-1].split("A")[0])
+                    gender = 1 if gender_number<=7380 else 0 #1 is female, 0 is male
                     batch_label_gender[i, gender] = self.image_value_range[-1]
 
                 # prior distribution on the prior of z
@@ -708,7 +714,7 @@ class FaceAging(object):
         num_samples = int(np.sqrt(self.size_batch))
         file_names = glob(testing_samples_dir)
         if len(file_names) < num_samples:
-            print 'The number of testing images is must larger than %d' % num_samples
+            print ('The number of testing images is must larger than %d' % num_samples)
             exit(0)
         sample_files = file_names[0:num_samples]
         sample = [load_image(
@@ -736,6 +742,4 @@ class FaceAging(object):
         self.test(images, gender_male, 'test_as_male.png')
         self.test(images, gender_female, 'test_as_female.png')
 
-        print '\n\tDone! Results are saved as %s\n' % os.path.join(self.save_dir, 'test', 'test_as_xxx.png')
-
-
+        print ('\n\tDone! Results are saved as %s\n' % os.path.join(self.save_dir, 'test', 'test_as_xxx.png'))
