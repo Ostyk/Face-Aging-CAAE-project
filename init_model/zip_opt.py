@@ -5,12 +5,12 @@ megabytes = kilobytes * 1000
 chunksize = int(24 * megabytes)                   # default: the upload limit of Github
 
 
-def split(fromfile, todir, chunksize=chunksize): 
+def split(fromfile, todir, chunksize=chunksize):
     if not os.path.exists(todir):                  # caller handles errors
         os.mkdir(todir)                            # make dir, read/write parts
     else:
         for fname in os.listdir(todir):            # delete any existing files
-            os.remove(os.path.join(todir, fname)) 
+            os.remove(os.path.join(todir, fname))
     partnum = 0
     input = open(fromfile, 'rb')                   # use binary mode on Windows
     while 1:                                       # eof=empty string from read
@@ -48,11 +48,9 @@ if __name__ == '__main__':
     #     parts = split('init_model/model-init.data-00000-of-00001', 'init_model/model_parts')
     # except:
     #     print 'Error during split:'
-        
+
     # join multiple parts to the original file
     try:
         join('init_model/model_parts', 'init_model/model-init.data-00000-of-00001')
     except:
-        print 'Error joining files:'
-        
-       
+        print ('Error joining files:')

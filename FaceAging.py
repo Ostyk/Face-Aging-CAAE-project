@@ -215,7 +215,35 @@ class FaceAging(object):
         )
 
         # optimizer for encoder + generator
-        with tf.variable_scope('opt', reuse=tf.AUTO_REUSE):
+        # with tf.variable_scope('opt', reuse=tf.AUTO_REUSE):
+        #     self.EG_optimizer = tf.train.AdamOptimizer(
+        #         learning_rate=EG_learning_rate,
+        #         beta1=beta1
+        #     ).minimize(
+        #         loss=self.loss_EG,
+        #         global_step=self.EG_global_step,
+        #         var_list=self.E_variables + self.G_variables
+        #     )
+        #
+        #     # optimizer for discriminator on z
+        #     self.D_z_optimizer = tf.train.AdamOptimizer(
+        #         learning_rate=EG_learning_rate,
+        #         beta1=beta1
+        #     ).minimize(
+        #         loss=self.loss_Dz,
+        #         var_list=self.D_z_variables
+        #     )
+        #
+        #     # optimizer for discriminator on image
+        #     self.D_img_optimizer = tf.train.AdamOptimizer(
+        #         learning_rate=EG_learning_rate,
+        #         beta1=beta1
+        #     ).minimize(
+        #         loss=self.loss_Di,
+        #         var_list=self.D_img_variables
+        #     )
+        with tf.variable_scope('', reuse=tf.AUTO_REUSE):
+            # optimizer for encoder + generator
             self.EG_optimizer = tf.train.AdamOptimizer(
                 learning_rate=EG_learning_rate,
                 beta1=beta1
