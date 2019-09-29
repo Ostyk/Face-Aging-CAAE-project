@@ -17,7 +17,7 @@ resources/
 save/
 data/
 report_data/
-init_model/
+
 
 # Distribution / packaging
 .Python

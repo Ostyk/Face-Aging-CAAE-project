@@ -15,11 +15,8 @@ Revamped for the following usage:
 ## Datasets
 * https://github.com/JingchunCheng/All-Age-Faces-Dataset (aligned faces)
 
-## Training
-```
-$ python main.py
-```
-
+## preliminary Results
+* ![results as found in the pdf](results.pdf)
 The training process has been tested on Google Cloud Platform NVIDIA Tesla P100 NVIDIA. The training time for 50 epochs on 13k images is roughly 3h.
 
 ## Custom Training
@@ -28,8 +25,8 @@ $ python main.py
     --dataset		default 'asian-faces'. Please put your own dataset in ../data
     --savedir		default 'save'. Please use a meaningful name, e.g., save_init_model.
     --epoch		default 50.
-    --use_trained_model	default True. If use a trained model, savedir specifies the model name. 
-    --use_init_model	default True. If load the trained model failed, use the init model save in ./init_model 
+    --use_trained_model	default True. If use a trained model, savedir specifies the model name.
+    --use_init_model	default True. If load the trained model failed, use the init model save in ./init_model
 ```
 
 ## Testing
@@ -44,7 +41,7 @@ $ python main.py --is_train False --testdir your_image_dir --savedir save
 * [`FaceAging.py`](FaceAging.py) is a class that builds and initializes the model, and implements training and testing related stuff
 * [`ops.py`](ops.py) consists of functions called `FaceAging.py` to implement options of convolution, deconvolution, fully connection, leaky ReLU, load and save images.   
 * [`main.py`](main.py) demonstrates `FaceAging.py`.
-    
+
 ## References
 [Zhifei Zhang](http://web.eecs.utk.edu/~zzhang61/), [Yang Song](http://web.eecs.utk.edu/~ysong18/), and [Hairong Qi](https://www.eecs.utk.edu/people/faculty/hqi/). "Age Progression/Regression by Conditional Adversarial Autoencoder." *IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2017.
 ```
