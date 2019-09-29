@@ -22,33 +22,10 @@ $ python main.py
 
 The training process has been tested on Google Cloud Platform NVIDIA Tesla P100 NVIDIA. The training time for 50 epochs on 13k images is roughly 3h.
 
-During training, a new folder named `save` will be created, including four sub-folders: `summary`, `samples`, `test`, and `checkpoint`.
-
-* `samples` saves the reconstructed faces at each epoch.
-* `test` saves the testing results at each epoch (generated faces at different ages based on input faces).
-* `checkpoint` saves the model.
-* `summary` saves the batch-wise losses and intermediate outputs. To visualize the summary, 
-```
-$ cd save/summary
-$ tensorboard --logdir .
-```
-
-After training, you can check the folders `samples` and `test` to visualize the reconstruction and testing performance, respectively. The following shows the reconstruction (left) and testing (right) results. The first row in the reconstruction results (left) are testing samples that yield the testing results (right) in the age ascending order from top to bottom.
-
-<p align="center">
-  <img src="demo/sample.png" width="400">  <img src="demo/test.png" width="400">
-</p>
-
-The reconstruction loss vs. epoch is shown below, which was passed through a low-pass filter for visualization purpose. The original record is saved in folder `summary`.
-
-<p align="center">
-  <img src="demo/loss_epoch.jpg" width="600">
-</p>
-
 ## Custom Training
 ```
 $ python main.py
-    --dataset		default 'UTKFace'. Please put your own dataset in ./data
+    --dataset		default 'asian-faces'. Please put your own dataset in ../data
     --savedir		default 'save'. Please use a meaningful name, e.g., save_init_model.
     --epoch		default 50.
     --use_trained_model	default True. If use a trained model, savedir specifies the model name. 
@@ -59,36 +36,16 @@ $ python main.py
 ```
 $ python main.py --is_train False --testdir your_image_dir --savedir save
 ```
-**Note**: `savedir` specifies the model name saved in the training. By default, the trained model is saved in the folder save (i.e., the model name).
-Then, it is supposed to print out the following message.
 
-```
-  	Building graph ...
-
-	Testing Mode
-
-	Loading pre-trained model ...
-	SUCCESS ^_^
-
-	Done! Results are saved as save/test/test_as_xxx.png
-```
-
-Specifically, the testing faces will be processed twice, being considered as male and female, respectively. Therefore, the saved files are named `test_as_male.png` and `test_as_female.png`, respectively. To achieve better results, it is necessary to train on a large and diverse dataset.
 
 ## A demo of training process
 
-The first row shows the input faces of different ages, and the other rows show the improvement of the output faces at every other epoch. From top to bottom, the output faces are in the age ascending order. 
-%
-<p align="center">
-  <img src="demo/demo_train.gif" width="800">
-</p>
-%
 ## Files
 * [`FaceAging.py`](FaceAging.py) is a class that builds and initializes the model, and implements training and testing related stuff
 * [`ops.py`](ops.py) consists of functions called `FaceAging.py` to implement options of convolution, deconvolution, fully connection, leaky ReLU, load and save images.   
 * [`main.py`](main.py) demonstrates `FaceAging.py`.
     
-## Citation
+## References
 [Zhifei Zhang](http://web.eecs.utk.edu/~zzhang61/), [Yang Song](http://web.eecs.utk.edu/~ysong18/), and [Hairong Qi](https://www.eecs.utk.edu/people/faculty/hqi/). "Age Progression/Regression by Conditional Adversarial Autoencoder." *IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2017.
 ```
 @inproceedings{zhang2017age,
@@ -98,4 +55,3 @@ The first row shows the input faces of different ages, and the other rows show t
   year={2017}
 }
 ```
-[Spotlight presentation](https://youtu.be/425rPG580dQ)
