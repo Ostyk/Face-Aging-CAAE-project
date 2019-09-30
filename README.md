@@ -1,5 +1,12 @@
 # Age Progression/Regression by Conditional Adversarial Autoencoder (CAAE)
 
+# Repo code structure
+* [Report (PDF)](demo/report.pdf): detailed paper and implementation
+* [init_model](init_model) contains the model weights
+* [main.py](main.py): main file
+* [ops.py](ops.py): helper wrapper functions for NNs
+* [FaceAging.py](FaceAging.py): Face Aging networks
+
 Utilising the TensorFlow implementation (this repo is forked) of the algorithm in the paper [Age Progression/Regression by Conditional Adversarial Autoencoder](http://web.eecs.utk.edu/~zzhang61/docs/papers/2017_CVPR_Age.pdf).
 
 <p align="center">
